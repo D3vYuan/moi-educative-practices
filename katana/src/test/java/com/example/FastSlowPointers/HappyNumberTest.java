@@ -1,6 +1,7 @@
 package com.example.FastSlowPointers;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +43,7 @@ public class HappyNumberTest {
     @DisplayName("HappyNumber Test #4 - 8")
     void test_case_4() {
         int input = 8;
-        boolean expectedAnswer = true;
+        boolean expectedAnswer = false;
         verifyResult(input, expectedAnswer);
     }
 
