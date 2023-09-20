@@ -21,4 +21,16 @@ public class JumpGame {
      public JumpGame(){
 
      }
+
+     public boolean jumpGame(int[] nums) {
+        int lastIndex = nums.length - 1;
+        for (int i = nums.length - 2; i >= 0; i --){
+            int currentDestination = i + nums[i];
+            if (currentDestination >= lastIndex){
+                lastIndex = i;
+            }
+        }
+
+        return lastIndex == 0;
+     }
 }
