@@ -1,5 +1,16 @@
 package com.example.Graphs;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
+
+import javafx.scene.layout.Priority;
+
 public class NetworkDelayTime {
     /**
      * A network of n nodes labeled 1 to n is provided along with a list of travel times for directed edges represented as 
@@ -19,4 +30,55 @@ public class NetworkDelayTime {
      public NetworkDelayTime(){
 
      }
+
+     public int networkDelayTime(int[][] times, int n, int k) {
+        Map<Integer, List<int[]>> adjacencyDictionary = new HashMap<>();
+        for (int[] time : times){
+            int source = time[0];
+            int destination = time[1];
+            int travelTime = time[2];
+            if (!adjacencyDictionary.containsKey(source)){
+                adjacencyDictionary.putIfAbsent(source, new ArrayList());
+            }
+            List<int[]> adjacency_list = adjacencyDictionary.get(source);
+            adjacency_list.add(new int[]{ destination, travelTime});
+        }
+
+        PriorityQueue<int[]> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        priorityQueue.offer(new int[]{0, k}); //first node
+        
+        Set<Integer> visited = new HashSet<>();
+        int delays = 0;
+
+        while (!priorityQueue.isEmpty()){
+            int[] currentNode = priorityQueue.poll();
+            int time = currentNode[0];
+            int nodeIndex = currentNode[1];
+
+            if (visited.contains(nodeIndex)){
+                continue;
+            }
+
+            visited.add(nodeIndex);
+            delays = Math.max(delays, time);
+            List<int[]> neighbors = adjacencyDictionary.getOrDefault(nodeIndex, new ArrayList<>());
+
+            for (int[] neighbor : neighbors){
+                int neighborNodeIndex = neighbor[0];
+                int neighborTime = neighbor[1];
+
+                if (!visited.contains(neighborNodeIndex)){
+                    int newTime = time + neighborTime;
+                    priorityQueue.offer(new int[] { newTime, neighborNodeIndex });
+                }
+            }
+        }
+
+        if (visited.size() == n){
+            return delays;
+        }
+
+        // Replace this placeholder return statement with your code    
+        return -1;
+    }
 }
