@@ -51,7 +51,13 @@ public class FlattenBinaryTree {
                 while (last.right != null){
                     last = last.right;
                 }
+
+                last.right = current.right;
+                current.right = current.left;
+                current.left = null;
             }
+
+            current = current.right;
         }
 
         // Replace this placeholder return statement with your code
