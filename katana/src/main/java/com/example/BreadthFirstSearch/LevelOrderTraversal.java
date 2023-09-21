@@ -77,7 +77,7 @@ public class LevelOrderTraversal {
                     result = result.append(" : ");
                 }
                 currentQueue = queues.get(levelNumber % 2);
-                nextQueue = queues.get((levelNumber + 1) % 2)
+                nextQueue = queues.get((levelNumber + 1) % 2);
             } else {
                 result = result.append(", ");
             }
