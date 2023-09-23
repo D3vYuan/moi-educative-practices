@@ -1,5 +1,7 @@
 package com.example.Stacks;
 
+import java.util.Stack;
+
 public class BasicCalculator {
     /**
      * Given a string containing an arithmetic expression, implement a basic calculator that evaluates the expression string. The expression string can contain integer numeric values and should be able to handle the “+” and “-” operators, as well as “()” parentheses.
@@ -16,4 +18,42 @@ public class BasicCalculator {
      public BasicCalculator(){
 
      }
+
+     public int calculator(String expression) {
+        int signValue = 1;
+        int number = 0;
+        int result = 0;
+
+        Stack<Integer> stack = new Stack<>();
+        
+        for (int expressionIndex = 0; expressionIndex < expression.length(); expressionIndex++) {
+            char expressionCharacter = expression.charAt(expressionIndex);
+            if (Character.isDigit(expressionCharacter)){
+                System.out.println(String.format("found(): is digit for %s", expressionCharacter));
+                number = number * 10 + Character.getNumericValue(expressionCharacter);
+            } else if (expressionCharacter == '+' || expressionCharacter == '-'){
+                System.out.println(String.format("found(): is sign for %s", expressionCharacter));
+                result += number * signValue;
+                signValue = expressionCharacter == '-' ? -1 : 1;
+                number = 0;
+            } else if (expressionCharacter == '('){
+                System.out.println(String.format("found(): is open bracket for %s", expressionCharacter));
+                stack.push(result);
+                stack.push(signValue);
+                result = 0;
+                signValue = 1;
+            } else if (expressionCharacter == ')'){
+                System.out.println(String.format("found(): is close bracket for %s", expressionCharacter));
+                
+                result += number * signValue;
+                int stackSignValue = stack.pop();
+                result *= stackSignValue;
+
+                int stackNumberValue = stack.pop();
+                result += stackNumberValue;
+                number = 0;
+            }
+        }
+        return result + number * signValue;
+    }
 }
