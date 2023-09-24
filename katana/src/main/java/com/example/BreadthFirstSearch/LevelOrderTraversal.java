@@ -4,8 +4,6 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Queue;
 
-import javax.swing.tree.TreeNode;
-
 public class LevelOrderTraversal {
     /**
      * Given the root of a binary tree, display the values of its nodes while

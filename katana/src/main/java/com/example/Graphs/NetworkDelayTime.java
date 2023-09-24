@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import javafx.scene.layout.Priority;
-
 public class NetworkDelayTime {
     /**
      * A network of n nodes labeled 1 to n is provided along with a list of travel times for directed edges represented as 

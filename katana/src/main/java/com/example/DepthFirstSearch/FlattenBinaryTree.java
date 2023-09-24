@@ -1,7 +1,5 @@
 package com.example.DepthFirstSearch;
 
-import javax.swing.tree.TreeNode;
-
 public class FlattenBinaryTree {
     /**
      * Given the root of a binary tree, the task is to flatten the tree into a
