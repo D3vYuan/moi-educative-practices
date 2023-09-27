@@ -1,4 +1,4 @@
-package main.java.com.example.DynamicProgramming;
+package com.example.DynamicProgramming;
 
 public class HouseRobber2 {
     /**
