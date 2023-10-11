@@ -1,5 +1,7 @@
 package com.example.DepthFirstSearch;
 
+import com.example.Utility.TreeNode;
+
 public class FlattenBinaryTree {
     /**
      * Given the root of a binary tree, the task is to flatten the tree into a
@@ -21,32 +23,20 @@ public class FlattenBinaryTree {
      * [5] Repeat the process until the given binary tree becomes flattened.
      */
 
-    class TreeNode<T> {
-        T data;
-        TreeNode<T> left;
-        TreeNode<T> right;
-
-        TreeNode(T data) {
-            this.data = data;
-            this.left = null;
-            this.right = null;
-        }
-    }
-
     public FlattenBinaryTree() {
 
     }
 
     public static TreeNode<Integer> flattenTree(TreeNode<Integer> root) {
-        if (root == null){
+        if (root == null) {
             return null;
         }
 
         TreeNode<Integer> current = root;
         while (current != null) {
-            if (current.left != null){
+            if (current.left != null) {
                 TreeNode<Integer> last = current.left;
-                while (last.right != null){
+                while (last.right != null) {
                     last = last.right;
                 }
 
