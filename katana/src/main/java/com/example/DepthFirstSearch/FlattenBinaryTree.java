@@ -34,18 +34,18 @@ public class FlattenBinaryTree {
 
         TreeNode<Integer> current = root;
         while (current != null) {
-            if (current.left != null) {
-                TreeNode<Integer> last = current.left;
-                while (last.right != null) {
-                    last = last.right;
+            if (current.getLeft() != null) {
+                TreeNode<Integer> last = current.getLeft();
+                while (last.getRight() != null) {
+                    last = last.getRight();
                 }
 
-                last.right = current.right;
-                current.right = current.left;
-                current.left = null;
+                last.setLeft(current.getRight());
+                current.setRight(current.getLeft());
+                current.setLeft(null);
             }
 
-            current = current.right;
+            current = current.getRight();
         }
 
         // Replace this placeholder return statement with your code
