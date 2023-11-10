@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.solution.Utility.Interval;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class MergeIntervalsTest {
@@ -20,18 +22,18 @@ public class MergeIntervalsTest {
 
     @Test
     @DisplayName("MergeIntervals Test #1 - [[1,5],[3,7],[4,6]]")
-    void test_case_1(){
-        int [][] inputArray = {
-            {1, 5},
-            {3, 7},
-            {4, 6},
+    void test_case_1() {
+        int[][] inputArray = {
+                { 1, 5 },
+                { 3, 7 },
+                { 4, 6 },
         };
 
-        int [][] expectedArray = {
-            {1, 7}
+        int[][] expectedArray = {
+                { 1, 7 }
         };
 
-        List<Interval> input = buildInterval(inputArray); 
+        List<Interval> input = buildInterval(inputArray);
         List<Interval> expectedAnswer = buildInterval(expectedArray);
         verifyResult(input, expectedAnswer);
     }
@@ -39,19 +41,20 @@ public class MergeIntervalsTest {
     public void verifyResult(List<Interval> input, List<Interval> expectedAnswer) {
         List<Interval> actualAnswer = mergeIntervals.mergeIntervals(input);
         assertThat(actualAnswer.size()).isEqualTo(expectedAnswer.size());
-        
+
         expectedAnswer.stream().forEach(e -> {
             int start = e.getStart();
             int end = e.getEnd();
-            Optional<Interval> matchingAnswer = actualAnswer.stream().filter(a -> a.getStart() == start && a.getEnd() == end).findAny();
+            Optional<Interval> matchingAnswer = actualAnswer.stream()
+                    .filter(a -> a.getStart() == start && a.getEnd() == end).findAny();
             assertThat(matchingAnswer.isPresent()).isTrue();
         });
     }
 
-    public static List<Interval> buildInterval(int[][] intervalStartEndValues){
+    public static List<Interval> buildInterval(int[][] intervalStartEndValues) {
         List<Interval> result = new ArrayList<>();
-        
-        for (int[] intervalValue : intervalStartEndValues){
+
+        for (int[] intervalValue : intervalStartEndValues) {
             int currentStart = intervalValue[0];
             int currentEnd = intervalValue[1];
             Interval currentInterval = new Interval(currentStart, currentEnd);

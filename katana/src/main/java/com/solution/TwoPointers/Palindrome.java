@@ -15,35 +15,16 @@ public class Palindrome {
      * TRUE.
      */
 
-    public Palindrome() {
-
-    }
-
-    public boolean isPalindrome(String s) {
-
-        // Replace this placeholder return statement with your code
-        int length = s.length();
-        if (length <= 1) {
-            return true;
-        }
-
-        int start = 0;
-        int end = s.length() - 1;
-
-        char[] stringChar = s.toCharArray();
-
-        while (start <= end) {
-            char startChar = stringChar[start];
-            char endChar = stringChar[end];
-
-            if (startChar != endChar) {
+    public boolean isPalindromeAnswer(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
                 return false;
             }
-
-            start += 1;
-            end -= 1;
+            left = left + 1;
+            right = right - 1;
         }
-
         return true;
     }
 }
