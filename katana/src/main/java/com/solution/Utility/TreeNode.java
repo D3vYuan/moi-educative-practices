@@ -5,7 +5,7 @@ public class TreeNode<T> {
     TreeNode<T> left;
     TreeNode<T> right;
 
-    TreeNode(T data) {
+    public TreeNode(T data) {
         this.data = data;
         this.left = null;
         this.right = null;
@@ -25,5 +25,9 @@ public class TreeNode<T> {
 
     public void setRight(TreeNode<T> right) {
         this.right = right;
+    }
+
+    public T getData() {
+        return data;
     }
 }

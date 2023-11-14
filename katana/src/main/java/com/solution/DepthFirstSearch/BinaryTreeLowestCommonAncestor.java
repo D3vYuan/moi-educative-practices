@@ -2,7 +2,7 @@ package com.solution.DepthFirstSearch;
 
 import com.solution.Utility.TreeNode;
 
-public class LowestCommonAncestor {
+public class BinaryTreeLowestCommonAncestor {
     /**
      * Given the root node of a binary tree with n nodes, your task is to find the
      * lowest common ancestor of two of its nodes, p and q.
@@ -26,39 +26,51 @@ public class LowestCommonAncestor {
      * [5] If any two of the three tracking variables are TRUE at a node, it means
      * that this is lowest common ancestor of the binary tree.
      */
-    private TreeNode<Integer> ancestor = null;
+    private TreeNode<Integer> lca;
 
-    private int boolToInt(boolean val) {
-        return (val) ? 1 : 0;
-    }
-
-    private boolean lowestCommonAncestorRec(TreeNode<Integer> currentNode, TreeNode<Integer> p,
-            TreeNode<Integer> q) {
-        if (currentNode == null)
-            return false;
-
-        boolean left = false, right = false, mid = false;
-
-        if (p == currentNode || q == currentNode) {
-            mid = true;
-        }
-
-        left = lowestCommonAncestorRec(currentNode.getLeft(), p, q);
-
-        if (ancestor == null) {
-            right = lowestCommonAncestorRec(currentNode.getRight(), p, q);
-        }
-
-        if (boolToInt(mid) + boolToInt(left) + boolToInt(right) >= 2) {
-            ancestor = currentNode;
-        }
-
-        return mid || left || right;
+    public BinaryTreeLowestCommonAncestor() {
+        this.lca = null;
     }
 
     public TreeNode<Integer> lowestCommonAncestor(TreeNode<Integer> root, TreeNode<Integer> p, TreeNode<Integer> q) {
         lowestCommonAncestorRec(root, p, q);
-        // Replace this placeholder return statement with your code
-        return ancestor;
+        return this.lca;
+    }
+
+    private boolean lowestCommonAncestorRec(TreeNode<Integer> currentNode, TreeNode<Integer> p, TreeNode<Integer> q) {
+        // if currentNode does not exist
+        if (currentNode == null) {
+            return false;
+        }
+
+        // initialize tracking variables
+        boolean left = false;
+        boolean right = false;
+        boolean mid = false;
+
+        // check if either of the input nodes is the currentNode
+        if (p == currentNode || q == currentNode) {
+            mid = true;
+        }
+
+        // traverse binary tree using depth-first search
+        left = lowestCommonAncestorRec(currentNode.getLeft(), p, q);
+
+        // if the lowest common ancestor has not been found, only then traverse the
+        // right subtree
+        if (this.lca == null) {
+            right = lowestCommonAncestorRec(currentNode.getRight(), p, q);
+        }
+
+        // if any two of the tracking variables are true, set currentNode as answer node
+        if (boolToInt(mid) + boolToInt(left) + boolToInt(right) >= 2)
+            lca = currentNode;
+
+        // return true if any of the tracking variables is true
+        return mid || left || right;
+    }
+
+    private int boolToInt(boolean val) {
+        return (val) ? 1 : 0;
     }
 }

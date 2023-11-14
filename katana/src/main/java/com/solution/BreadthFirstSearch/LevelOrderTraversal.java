@@ -2,7 +2,11 @@ package com.solution.BreadthFirstSearch;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+
+import com.solution.Utility.TreeNode;
 
 public class LevelOrderTraversal {
     /**
@@ -22,67 +26,52 @@ public class LevelOrderTraversal {
      * [5] Repeat until currentQueue is empty.
      */
 
-    class TreeNode<T> {
-        T data;
-        TreeNode<T> left;
-        TreeNode<T> right;
-
-        TreeNode(T data) {
-            this.data = data;
-            this.left = null;
-            this.right = null;
-        }
-    }
-
-    public LevelOrderTraversal() {
-
-    }
-
-    public String levelOrderTraversal(TreeNode<Integer> root) {
-        StringBuilder result = new StringBuilder();
+    public static String levelOrderTraversal(TreeNode<Integer> root) {
         if (root == null) {
             return "None";
         }
 
-        ArrayList<Queue<TreeNode<Integer>>> queues = new ArrayList<>();
-        queues.add(new ArrayDeque<TreeNode<Integer>>());
-        queues.add(new ArrayDeque<TreeNode<Integer>>());
+        StringBuilder sb = new StringBuilder();
+        List<Queue<TreeNode<Integer>>> queues = new ArrayList<>();
+
+        queues.add(new LinkedList<TreeNode<Integer>>());
+        queues.add(new LinkedList<TreeNode<Integer>>());
 
         Queue<TreeNode<Integer>> currentQueue = queues.get(0);
         Queue<TreeNode<Integer>> nextQueue = queues.get(1);
 
         currentQueue.add(root);
+
         int levelNumber = 0;
         int n = 0;
 
         while (!currentQueue.isEmpty()) {
             n += 1;
 
-            TreeNode<Integer> temp = currentQueue.poll();
-            result.append(String.valueOf(temp.data));
+            TreeNode<Integer> currentNode = currentQueue.poll();
+            sb.append(String.valueOf(currentNode.getData()));
 
-            if (temp.left != null) {
-                nextQueue.add(temp.left);
+            if (currentNode.getLeft() != null) {
+                nextQueue.add(currentNode.getLeft());
             }
 
-            if (temp.right != null) {
-                nextQueue.add(temp.right);
+            if (currentNode.getRight() != null) {
+                nextQueue.add(currentNode.getRight());
             }
 
             if (currentQueue.isEmpty()) {
-                ++levelNumber;
+                levelNumber += 1;
                 if (!nextQueue.isEmpty()) {
-                    result = result.append(" : ");
+                    sb.append(" : ");
                 }
+                // Switch Next Queue with Current Queue
                 currentQueue = queues.get(levelNumber % 2);
                 nextQueue = queues.get((levelNumber + 1) % 2);
             } else {
-                result = result.append(", ");
+                sb.append(",");
             }
-
         }
 
-        // Replace this placeholder return statement with your code
-        return result.toString();
+        return sb.toString();
     }
 }
