@@ -17,7 +17,7 @@ public class DiameterBinaryTree {
      * the length of the tree’s diameter.
      */
 
-    private List<Integer> diameterHelper(TreeNode<Integer> node, int diameter) {
+    private static List<Integer> diameterHelper(TreeNode<Integer> node, int diameter) {
         List<Integer> result = new ArrayList<>();
         if (node == null) {
             result.add(0);
