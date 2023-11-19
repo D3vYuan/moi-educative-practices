@@ -3,7 +3,7 @@ package com.solution.DynamicProgramming;
 public class MaximumProductSubarray {
     /*
      * 
-     * [Strategy]
-     * 
+     * Strategy
+     * [1] 
      */
 }

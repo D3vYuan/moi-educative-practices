@@ -1,5 +1,9 @@
 package com.solution.DepthFirstSearch;
 
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Queue;
+
 import com.solution.Utility.TreeNode;
 
 public class MaximumDepthTree {
@@ -19,8 +23,37 @@ public class MaximumDepthTree {
      */
 
     public static int findMaxDepth(TreeNode<Integer> root) {
+        if (root == null) {
+            return 0;
+        }
 
-        // Replace this placeholder return statement with your code
-        return 0;
+        Queue<TreeNode<Integer>> stack = new ArrayDeque<>();
+        Queue<Integer> deptQueue = new LinkedList<>();
+
+        stack.offer(root);
+        deptQueue.offer(1);
+
+        int maxDepth = 0;
+
+        while (!stack.isEmpty()) {
+            TreeNode<Integer> node = stack.poll();
+            int depth = deptQueue.poll();
+
+            if (node.getLeft() != null) {
+                stack.offer(node.getLeft());
+                deptQueue.offer(depth + 1);
+            }
+
+            if (node.getRight() != null) {
+                stack.offer(node.getRight());
+                deptQueue.offer(depth + 1);
+            }
+
+            if (node.getLeft() == null && node.getRight() == null) {
+                maxDepth = Math.max(maxDepth, depth);
+            }
+        }
+
+        return maxDepth;
     }
 }
